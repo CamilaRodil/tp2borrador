@@ -1,3 +1,17 @@
+function Juego() {
+  JugadorLimite();
+  lasImagenes();
+  puntajeYlasVidas();
+  Cocodrilos();
+  // Debes llamar a las funciones faltantes aquí
+  // tronco();
+  // verificarColision();
+  // colisionGenerica();
+  // subirEscalera();
+  // actualizarJugador();
+  // mostrarJugador();
+}
+
 function mousePressed() {
   if (activo === "comenzar") {
     if (mouseX > 550 && mouseX < 850 && mouseY > 470 && mouseY < 500) {
@@ -22,11 +36,11 @@ function JugadorLimite() {
   }
 }
 
-function lasImagenes(){
-  if (bounds==1) {
+function lasImagenes() {
+  if (bounds == 1) {
     image(fondo1, 0, fondoX, width, height);
     image(fondo, 0, fondoX, width, height);
-    if (frameCount% 210<150) {
+    if (frameCount % 210 < 150) {
       image(cocodrilos, 380, 540);
     } else {
       image(cocodrilos1, 380, 535);
@@ -34,34 +48,35 @@ function lasImagenes(){
   } else {
     image(fondo, 0, fondoX, width, height);
     image(fondo1, 0, fondoX, width, height);
-    tronco(1150, 530);
-    subirEscalera(width/2-100, plataformaY, 100, 200);
+    // Debes llamar a las imágenes de tronco y escalera aquí
+    // tronco(1150, 530);
+    // subirEscalera(width / 2 - 100, plataformaY, 100, 200);
   }
 }
 
-function puntajeYlasVidas(){
-  textFont(fuente); // Establecer la fuente cargada
+function puntajeYlasVidas() {
+  textFont(fuente);
   textSize(70);
   fill(255);
   text(`${puntaje}`, 300, 90);
 
   for (let i = 0; i < vidas; i++) {
-    text("|", x+i*50, y);
+    text("|", x + i * 50, y);
   }
-if(activo){
-  let tiempoTranscurrido = floor(frameCount / 60); // 60 cuadros por segundo
-  minutos = 1- floor(tiempoTranscurrido / 60);
-  segundos = 59 - (tiempoTranscurrido % 60);
+  if (activo) {
+    let tiempoTranscurrido = floor(frameCount / 60);
+    minutos = 1 - floor(tiempoTranscurrido / 60);
+    segundos = 59 - (tiempoTranscurrido % 60);
   }
-  // Mostrar el tiempo
+
   if (minutos >= 0 && segundos >= 0) {
-    text(`${minutos}:${segundos < 10 ? '0' : ''}${segundos}`,230,170);
+    text(`${minutos}:${segundos < 10 ? '0' : ''}${segundos}`, 230, 170);
   } else {
-    text("Tiempo agotado /n apreta R para reinciar", 230, 190);   
+    text("Tiempo agotado /n apreta R para reiniciar", 230, 190);
   }
 }
 
-function Cocodrilos(){
+function Cocodrilos() {
   if (bounds==0) {
     if (verificarColision(jugadorX, jugadorY, jugadorAncho, jugadorAltura, plataformaX/2-30, plataformaY, plataformaAncho/2-80, plataformaAltura)) {
       estaSaltando = false;
